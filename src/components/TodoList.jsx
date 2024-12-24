@@ -1,5 +1,5 @@
 import styles from './TodoList.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import deleteIcon from '../assets/del.svg';
 
 const Todo = () => {
@@ -7,6 +7,22 @@ const Todo = () => {
   const [plans, setPlans] = useState([]);
   const [hours, setHours] = useState('');
 
+  // Load plans from localStorage when the component mounts
+  useEffect(() => {
+    const savedPlans = JSON.parse(localStorage.getItem('plans'));
+    if (savedPlans) {
+      setPlans(savedPlans);
+    }
+  }, []);
+
+  // Save plans to localStorage whenever the plans state changes
+  useEffect(() => {
+    if (plans.length > 0) {
+      localStorage.setItem('plans', JSON.stringify(plans));
+    }
+  }, [plans]);
+
+  // Function to add a new plan
   function addPlans() {
     if (inputValue.trim() && hours > 0) {
       setPlans((prevPlans) => [
@@ -19,10 +35,12 @@ const Todo = () => {
     }
   }
 
+  // Function to remove a plan
   function removePlan(subject) {
     setPlans((prevPlans) => prevPlans.filter((plan) => plan.subject !== subject));
   }
 
+  // Function to increment hours for a plan
   function incrementHours(subject) {
     setPlans((prevPlans) =>
       prevPlans.map((plan) =>
@@ -31,6 +49,7 @@ const Todo = () => {
     );
   }
 
+  // Function to decrement hours for a plan
   function decrementHours(subject) {
     setPlans((prevPlans) =>
       prevPlans.map((plan) =>
@@ -43,7 +62,7 @@ const Todo = () => {
 
   return (
     <>
-      <h1>Education Planner</h1>
+      <h1>Study Planner</h1>
       <div className={styles.container}>
         <input
           type="text"
@@ -62,7 +81,7 @@ const Todo = () => {
       <ul className={styles.plans}>
         {plans.map((plan, idx) => (
           <li key={`${idx}_${plan.subject}`}>
-            <span>{plan.subject}</span> 
+            <span>{plan.subject}</span>
             <div className={styles.hours}>
               <button onClick={() => decrementHours(plan.subject)}>-</button>
               {plan.hours} hours
