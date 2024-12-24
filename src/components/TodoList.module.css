@@ -1,22 +1,18 @@
-/* Import Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-/* Reset some default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Body background and general layout */
 body {
   background-color: #f7f7f7;
   font-size: 16px;
   line-height: 1.5;
 }
 
-/* Main container */
 .container {
   display: flex;
   flex-direction: column;
@@ -30,17 +26,15 @@ body {
   align-items: center;
 }
 
-/* Header */
 h1 {
   text-align: center;
   color: #333;
   font-size: 2rem;
   margin-bottom: 20px;
   letter-spacing: 0.5px;
-  font-weight: 600; /* Use a heavier font weight for the header */
+  font-weight: 600;
 }
 
-/* Input fields styling */
 input[type="text"],
 input[type="number"] {
   width: 100%;
@@ -59,7 +53,6 @@ input[type="number"]:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
-/* Button styling */
 button {
   padding: 12px 20px;
   background-color: #007BFF;
@@ -76,15 +69,14 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Plans list styling */
 .plans {
   margin-top: 20px;
   list-style: none;
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .plans li {
@@ -96,15 +88,81 @@ button:hover {
   font-size: 1rem;
   color: #333;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 600px;
-  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .plans li:hover {
-  transform: translateY(-5px); /* Lift the list item */
+  transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .plans li span {
-  font-weight: 500; /* Use a slightly heavier weight for subject */
+  font-weight: 500;
+}
+
+.plans li img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.plans li img:hover {
+  transform: scale(1.2);
+}
+
+/* Assuming you're adding this to the existing styles */
+
+/* Container for the hours buttons */
+.hours {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Styling for the + and - buttons */
+.hours button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hours button:hover {
+  background-color: #007BFF;
+}
+
+.hours button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .plans li {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
 }
